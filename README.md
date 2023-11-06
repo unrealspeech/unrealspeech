@@ -72,7 +72,7 @@ pip install unrealspeech
 | Pro   | 8                   |
 
 ## Obtaining an API Key
-
+[Get your API Key](https://unrealspeech.com/dashboard)
 To use the Unreal Speech API, you'll need to obtain an API key by signing up for an account on the Unreal Speech website. Once you have an API key, you can use it to initialize the UnrealSpeechAPI class.
 
 ## Usage
@@ -82,7 +82,7 @@ To use the Unreal Speech API, you'll need to obtain an API key by signing up for
 First, import the UnrealSpeechAPI class:
 
 ```python
-from unrealspeech.api import UnrealSpeechAPI
+from unrealspeech import UnrealSpeechAPI
 ```
 
 Then, initialize the API with your API key:
@@ -103,8 +103,23 @@ voice_id = "Scarlett"  # Choose the desired voice
 audio_data = speech_api.speech(text_to_speech, timestamp_type, voice_id)
 
 # Save the audio to a file
-with open("output.mp3", "wb") as audio_file:
-    audio_file.write(audio_data)
+if 'OutputUri' in audio_data:
+    output_uri = audio_data['OutputUri']
+
+    # Download the audio from the provided URL
+    response = requests.get(output_uri)
+
+    if response.status_code == 200:
+        audio_bytes = response.content
+
+        # Save the audio to a file
+        with open("output.mp3", "wb") as audio_file:
+            audio_file.write(audio_bytes)
+    else:
+        print(f"Failed to download audio from {output_uri}.")
+else:
+    print("No 'OutputUri' key found in the response.")
+
 
 ```
 
@@ -115,7 +130,7 @@ For short and time-sensitive cases, you can use the /stream endpoint to stream a
 ```python
 # Stream audio
 text_to_stream = "This is a short text to be synthesized."
-audio_data = speech_api.stream(text_to_stream, voice_id, bitrate="192k", speed=0, pitch=1.0, codec="libmp3lame", temperature=0.25)
+response = speech_api.stream(text_to_stream, voice_id, bitrate="192k", speed=0, pitch=1.0, codec="libmp3lame", temperature=0.25)
 
 ```
 
@@ -128,7 +143,7 @@ You can manage synthesis tasks for longer text using the `/synthesisTasks` endpo
 task_id = speech_api.create_synthesis_task(text_to_speech, voice_id, bitrate="320k", timestamp_type="word")
 
 # Check the task status
-task_status = speech_api.get_synthesis_task_status(task_id)
+response = speech_api.get_synthesis_task_status(task_id)
 
 ```
 
