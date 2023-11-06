@@ -1,0 +1,41 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+
+# Distribution / packaging files
+dist/
+build/
+*.egg-info/
+*.egg
+*.egg-info
+*.eggs
+*.egg-info/
+MANIFEST
+command.txt
+# Virtual environment files (if you use virtual environments)
+venv/
+env/
+.venv/
+.venv3/
+.venv2/
+
+# Compiled Python files
+*.pyc
+
+# Logs and databases
+*.log
+*.sqlite
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# User-specific Python environment
+*.python-version

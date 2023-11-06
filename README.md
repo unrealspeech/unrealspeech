@@ -23,7 +23,7 @@ Unreal Speech API Python package allows you to easily integrate the Unreal Speec
 You can install the Unreal Speech API Python package using pip:
 
 ```bash
-pip install unrealspeech-api
+pip install unrealspeech
 ```
 
 ## Available endpoints
