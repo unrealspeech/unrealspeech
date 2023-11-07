@@ -130,7 +130,25 @@ For short and time-sensitive cases, you can use the /stream endpoint to stream a
 ```python
 # Stream audio
 text_to_stream = "This is a short text to be synthesized."
-response = speech_api.stream(text_to_stream, voice_id, bitrate="192k", speed=0, pitch=1.0, codec="libmp3lame", temperature=0.25)
+voice_id = "Will"
+
+try:
+    # Generate audio from text
+    audio_response = speech_api.stream(
+        "Example of using stream", voice_id, bitrate="192k")
+
+    # Extract audio content
+    audio_data = audio_response
+
+    # Save the audio to a file
+    with open("demo.mp3", "wb") as audio_file:
+        audio_file.write(audio_data)
+
+    print("Audio successfully generated and saved.")
+
+except requests.exceptions.HTTPError as e:
+    print(f"HTTP Error: {e.response.content}")
+
 
 ```
 
