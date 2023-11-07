@@ -137,12 +137,9 @@ try:
     audio_response = speech_api.stream(
         "Example of using stream", voice_id, bitrate="192k")
 
-    # Extract audio content
-    audio_data = audio_response
-
     # Save the audio to a file
     with open("demo.mp3", "wb") as audio_file:
-        audio_file.write(audio_data)
+        audio_file.write(audio_response)
 
     print("Audio successfully generated and saved.")
 
