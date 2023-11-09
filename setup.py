@@ -21,6 +21,8 @@ license = 'MIT'
 
 install_requires = [
     'requests',
+    'soundfile',
+    'sounddevice'
 ]
 
 setup(
@@ -32,7 +34,7 @@ setup(
     author_email=author_email,
     url=url,
     license=license,
-    ong_description=open('README.md').read(),
+    long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     install_requires=install_requires,
 )
