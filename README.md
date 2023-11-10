@@ -72,6 +72,7 @@ pip install unrealspeech
 | Pro   | 8                   |
 
 ## Obtaining an API Key
+
 [Get your API Key](https://unrealspeech.com/dashboard)
 To use the Unreal Speech API, you'll need to obtain an API key by signing up for an account on the Unreal Speech website. Once you have an API key, you can use it to initialize the UnrealSpeechAPI class.
 
@@ -82,7 +83,7 @@ To use the Unreal Speech API, you'll need to obtain an API key by signing up for
 First, import the UnrealSpeechAPI class:
 
 ```python
-from unrealspeech import UnrealSpeechAPI
+from unrealspeech import UnrealSpeechAPI, play, save
 ```
 
 Then, initialize the API with your API key:
@@ -102,24 +103,8 @@ timestamp_type = "sentence"  # Choose from 'sentence' or 'word'
 voice_id = "Scarlett"  # Choose the desired voice
 audio_data = speech_api.speech(text_to_speech, timestamp_type, voice_id)
 
-# Save the audio to a file
-if 'OutputUri' in audio_data:
-    output_uri = audio_data['OutputUri']
-
-    # Download the audio from the provided URL
-    response = requests.get(output_uri)
-
-    if response.status_code == 200:
-        audio_bytes = response.content
-
-        # Save the audio to a file
-        with open("output.mp3", "wb") as audio_file:
-            audio_file.write(audio_bytes)
-    else:
-        print(f"Failed to download audio from {output_uri}.")
-else:
-    print("No 'OutputUri' key found in the response.")
-
+# Play audio
+play(audio_data)
 
 ```
 
@@ -132,19 +117,14 @@ For short and time-sensitive cases, you can use the /stream endpoint to stream a
 text_to_stream = "This is a short text to be synthesized."
 voice_id = "Will"
 
-try:
-    # Generate audio from text
-    audio_response = speech_api.stream(
-        "Example of using stream", voice_id, bitrate="192k")
+# Generate audio from text
+audio_data = speech_api.stream(
+    "Example of using stream", voice_id, bitrate="192k")
 
-    # Save the audio to a file
-    with open("demo.mp3", "wb") as audio_file:
-        audio_file.write(audio_response)
+ # Play audio
+play(audio_data)
 
-    print("Audio successfully generated and saved.")
 
-except requests.exceptions.HTTPError as e:
-    print(f"HTTP Error: {e.response.content}")
 
 
 ```
@@ -158,7 +138,23 @@ You can manage synthesis tasks for longer text using the `/synthesisTasks` endpo
 task_id = speech_api.create_synthesis_task(text_to_speech, voice_id, bitrate="320k", timestamp_type="word")
 
 # Check the task status
-response = speech_api.get_synthesis_task_status(task_id)
+audio_data = speech_api.get_synthesis_task_status(task_id)
+
+# Play audio
+play(audio_data)
+
+```
+
+## Downloading Audio
+
+You can download audio buy simply calling the save function
+
+```python
+  from unrealspeech import save
+
+  audio_data = sppech_api.speech('How to download your audio easily')
+  # after you get a response
+  save(audio_data, "output.mp3")
 
 ```
 

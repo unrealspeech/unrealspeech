@@ -45,8 +45,7 @@ class UnrealSpeechAPI:
             response = self._make_get_request(url)
             task_status = response.json()["SynthesisTask"]
             if task_status.get('TaskStatus') == 'completed':
-                print(task_status)
-                break
+                return task_status
             else:
                 print("Audiobook generation is in progress.")
 
