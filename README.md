@@ -147,7 +147,7 @@ play(audio_data)
 
 ## Downloading Audio
 
-You can download audio buy simply calling the save function
+You can download audio by simply calling the save function
 
 ```python
   from unrealspeech import save
