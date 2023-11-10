@@ -153,9 +153,9 @@ You can download audio buy simply calling the save function
   from unrealspeech import save
 
   audio_data = sppech_api.speech('How to download your audio easily')
-  # after you get a response
-  save(audio_data, "output.mp3")
 
+  # you can use the save function to save the audio
+  save(audio_data, "output.mp3")
 ```
 
 ## Contributing
