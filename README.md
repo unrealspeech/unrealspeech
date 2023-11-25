@@ -26,7 +26,7 @@ You can install the Unreal Speech API Python package using pip:
 pip install unrealspeech
 ```
 
-You also need to install this two dependencies
+To ensure the package functions correctly, it is necessary to install the following dependencies as well.
 ```bash
 pip install playsound pydub simpleaudio
 ```
