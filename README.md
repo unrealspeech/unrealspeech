@@ -1,6 +1,6 @@
 # Unreal Speech API Python Package
 
-Unreal Speech API Python package allows you to easily integrate the Unreal Speech API into your Python applications for text-to-speech (TTS) synthesis. This package provides convenient methods for working with the Unreal Speech API, including generating speech, managing synthesis tasks, and streaming audio.
+Unreal Speech Python SDK allows you to easily integrate the Unreal Speech API into your Python applications for text-to-speech (TTS) synthesis. This SDK provides convenient methods for working with the Unreal Speech API, including generating speech, managing synthesis tasks, and streaming audio.
 
 ## Table of Contents
 
