@@ -106,7 +106,10 @@ You can generate speech by providing a text string and optional parameters:
 text_to_speech = "This is a sample text."
 timestamp_type = "sentence"  # Choose from 'sentence' or 'word'
 voice_id = "Scarlett"  # Choose the desired voice
-audio_data = speech_api.speech(text_to_speech, timestamp_type, voice_id)
+bitrate = "192k"
+speed = 0 
+pitch = 1.0
+audio_data = speech_api.speech(text=text_to_speech,voice_id=voice_id, bitrate=bitrate, timestamp_type=timestamp_type, speed=speed, pitch=pitch)
 
 # Play audio
 play(audio_data)
@@ -121,17 +124,17 @@ For short and time-sensitive cases, you can use the /stream endpoint to stream a
 # Stream audio
 text_to_stream = "This is a short text to be synthesized."
 voice_id = "Will"
+timestamp_type = "sentence"  # Choose from 'sentence' or 'word'
+bitrate = "192k"
+speed = 0
+pitch = 1.0
 
 # Generate audio from text
 audio_data = speech_api.stream(
-    "Example of using stream", voice_id, bitrate="192k")
+   text=text_to_stream, voice_id=voice_id, bitrate=bitrate, timestamp_type=timestamp_type, speed, pitch)
 
  # Play audio
 play(audio_data)
-
-
-
-
 ```
 
 ## Managing Synthesis Tasks
@@ -140,14 +143,13 @@ You can manage synthesis tasks for longer text using the `/synthesisTasks` endpo
 
 ```python
 # Create a synthesis task
-task_id = speech_api.create_synthesis_task(text_to_speech, voice_id, bitrate="320k", timestamp_type="word")
+task_id = speech_api.create_synthesis_task(text="Long content", voice_id="Will", bitrate="320k", timestamp_type="word", speed=0, pitch=1.0)
 
 # Check the task status
 audio_data = speech_api.get_synthesis_task_status(task_id)
 
 # Play audio
 play(audio_data)
-
 ```
 
 ## Downloading Audio
