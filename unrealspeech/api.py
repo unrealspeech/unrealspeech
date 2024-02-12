@@ -29,12 +29,14 @@ class UnrealSpeechAPI:
             "Pitch": pitch,
             "Codec": codec,
             "Temperature": temperature,
+            "Pitch": pitch
+
         }
 
         response = self._make_post_request(url, payload)
         return response.content
 
-    def create_synthesis_task(self, text, voice_id, bitrate="192k", speed=0, timestamp_type="word"):
+    def create_synthesis_task(self, text, voice_id, bitrate="192k", pitch=1.0, speed=0, timestamp_type="word"):
         url = f"{self.base_url}/synthesisTasks"
         payload = {
             "Text": [text],
@@ -42,6 +44,8 @@ class UnrealSpeechAPI:
             "Bitrate": bitrate,
             "Speed": speed,
             "TimestampType": timestamp_type,
+            "Pitch": pitch
+
         }
 
         response = self._make_post_request(url, payload)
@@ -59,7 +63,7 @@ class UnrealSpeechAPI:
             else:
                 print("Audiobook generation is in progress.")
 
-    def speech(self, text, voice_id="Scarlett", bitrate="320k", speed=0, timestamp_type="sentence"):
+    def speech(self, text, voice_id="Scarlett", bitrate="320k", pitch=1.0, speed=0, timestamp_type="sentence"):
         url = f"{self.base_url}/speech"
         payload = {
             "Text": text,
@@ -67,7 +71,8 @@ class UnrealSpeechAPI:
             "Bitrate": bitrate,
             "Speed": speed,
             "OutputFormat": "uri",
-            "TimestampType": timestamp_type
+            "TimestampType": timestamp_type,
+            "Pitch": pitch
         }
 
         response = self._make_post_request(url, payload)
