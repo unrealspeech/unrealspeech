@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 name = 'unrealspeech'
 
 # Version number
-version = '0.1.2'
+version = '0.1.3'
 
 # Package description
 description = 'A Python package for interacting with the Unreal Speech API.'
@@ -22,7 +22,8 @@ license = 'MIT'
 install_requires = [
     'requests',
     'soundfile',
-    'sounddevice'
+    'sounddevice',
+    'python-dotenv'
 ]
 
 setup(

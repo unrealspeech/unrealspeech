@@ -1,12 +1,21 @@
 import requests
+import os
+from dotenv import load_dotenv
 
 
 class UnrealSpeechAPI:
-    def __init__(self, api_key):
-        self.api_key = api_key
+    def __init__(self):
+        load_dotenv()
+
+        # Check if UNREALSPEECH_API_KEY is present in the environment
+        self.api_key = os.getenv("UNREALSPEECH_API_KEY")
+        if not self.api_key:
+            raise ValueError(
+                "UNREALSPEECH_API_KEY not found in the environment")
+
         self.base_url = "https://api.v6.unrealspeech.com"
         self.headers = {
-            "Authorization": f"Bearer {api_key}",
+            "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
         }
 
@@ -25,12 +34,13 @@ class UnrealSpeechAPI:
         response = self._make_post_request(url, payload)
         return response.content
 
-    def create_synthesis_task(self, text, voice_id, bitrate="192k", timestamp_type="word"):
+    def create_synthesis_task(self, text, voice_id, bitrate="192k", speed=0, timestamp_type="word"):
         url = f"{self.base_url}/synthesisTasks"
         payload = {
             "Text": [text],
             "VoiceId": voice_id,
             "Bitrate": bitrate,
+            "Speed": speed,
             "TimestampType": timestamp_type,
         }
 
@@ -49,12 +59,13 @@ class UnrealSpeechAPI:
             else:
                 print("Audiobook generation is in progress.")
 
-    def speech(self, text, voiceId="Scarlett", bitrate="320k", timestamp_type="sentence"):
+    def speech(self, text, voiceId="Scarlett", bitrate="320k", speed=0, timestamp_type="sentence"):
         url = f"{self.base_url}/speech"
         payload = {
             "Text": text,
             "VoiceId": voiceId,
             "Bitrate": bitrate,
+            "Speed": speed,
             "OutputFormat": "uri",
             "TimestampType": timestamp_type
         }
