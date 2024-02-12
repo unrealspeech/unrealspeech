@@ -59,11 +59,11 @@ class UnrealSpeechAPI:
             else:
                 print("Audiobook generation is in progress.")
 
-    def speech(self, text, voiceId="Scarlett", bitrate="320k", speed=0, timestamp_type="sentence"):
+    def speech(self, text, voice_id="Scarlett", bitrate="320k", speed=0, timestamp_type="sentence"):
         url = f"{self.base_url}/speech"
         payload = {
             "Text": text,
-            "VoiceId": voiceId,
+            "VoiceId": voice_id,
             "Bitrate": bitrate,
             "Speed": speed,
             "OutputFormat": "uri",
