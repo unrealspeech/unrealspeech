@@ -4,11 +4,11 @@ from dotenv import load_dotenv
 
 
 class UnrealSpeechAPI:
-    def __init__(self):
+    def __init__(self, api_key):
         load_dotenv()
 
         # Check if UNREALSPEECH_API_KEY is present in the environment
-        self.api_key = os.getenv("UNREALSPEECH_API_KEY")
+        self.api_key = os.getenv("UNREALSPEECH_API_KEY") or api_key
         if not self.api_key:
             raise ValueError(
                 "UNREALSPEECH_API_KEY not found in the environment")

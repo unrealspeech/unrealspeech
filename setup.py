@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 name = 'unrealspeech'
 
 # Version number
-version = '0.1.3'
+version = '0.1.5'
 
 # Package description
 description = 'A Python package for interacting with the Unreal Speech API.'
